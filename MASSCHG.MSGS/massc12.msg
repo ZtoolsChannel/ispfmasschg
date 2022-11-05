@@ -33,3 +33,8 @@ MASSC126 'Invalid Parameter'                         .ALARM=YES
 MASSC127 'Jobcards defaulted'                        .ALARM=YES
 'Job statement information was defaulted from those used for the ' +
 'ISPF LOG and LIST JCL.'
+
+MASSC128 'Missing Parameter'                         .ALARM=YES
+'The $NOTFND macro requires a valid find string specified ' +
+'in the Macro parameter field on the MASSCHG panel.'
+

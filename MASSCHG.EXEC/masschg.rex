@@ -329,7 +329,7 @@ Return
 Check_$NOTFND_parms:
 If massparm = "" Then
   Do
-    Address ISPEXEC "SETMSG MSG(MASSC125)"
+    Address ISPEXEC "SETMSG MSG(MASSC128)"
     error = "Y"
     csrfld = "MASSPARM"
   End
