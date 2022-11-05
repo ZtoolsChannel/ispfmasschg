@@ -13,25 +13,22 @@
 	Tutorial - Edit Macro Mass Change Facility -Tutorial
 Command ===>ZCMD                                                             
 
-   The$LOGITmacro is an example that uses the MASSMEMx variables to log
-   information found in the members to a data set.  This enables your macro
-   to allocate and open the data set before the first member and close and
-   free the data set after the last member.
+   The$NOTFNDmacro is included in this package as another example of how
+   to use the Macro parameter field and works the opposite of $FNDIT.
 
-   To use this macro, enter $LOGIT in the macro field and a valid Find string,
-   e.g.'ISREDIT' 1 20in the macro parameter field. The macro will assume
-   the ALL parameter so do not include it. The macro will allocate a
-   userid.$LOGIT.CSV data set to write the results (member name, number of
-   lines, number of strings found, and the number of lines with the string) as
-   a comma-delimited file.
+   To use this macro, enter $NOTFND in the macro field and a valid Find string,
+   e.g.'ISREDIT' 1 20in the macro parameter field.
 
-   If running in foreground, the data set will be viewed after the last member
-   is processed.
+   If the resulting Find command contains an error, a message will be
+   displayed.  In this error situation, the MASSEXIT macro will be called
+   to set the MASSEXIT variable so no additional members will be processed.
 
-   Because $LOGIT is only being used to gather information and not make any
-   changes, the macro contains anISREDIT CANCELcommand.  If you use this
-   as the basis for other macros that may also make changes, you will want to
-   instead use theISREDIT ENDcommand to save any changes.
+   When running in the foreground, the macro will display any member in which
+   the string is not found so you can perform any updates and then END.
+   Members where the string is found will be bypassed.
+
+   When running in batch, the member, line number, and line will be written
+   to the SYSTSPRT DD for each line matching the FIND command.
 
                            (continued on next page)
 )PROC

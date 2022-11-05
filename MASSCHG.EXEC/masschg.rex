@@ -4,13 +4,13 @@
 /*                                                                            */
 /* Author      :     DAN DIRKSE                                               */
 /* Release     :     V4R2                                                     */
-/* Last update :     03/02/2021                                               */
+/* Last update :     11/01/20222                                              */
 /* Parts Needed:                                                              */
 /*      Panels :     MASSC001-MASSC005                                        */
-/*                   MASSCT00, 10-13, 15, 20-25, 30                           */
+/*                   MASSCT00, 10-13, 15, 20-26, 30                           */
 /*      Msgs   :     MASSC10,MASSC11,MASSC12                                  */
 /*      Skels  :     MASSKEL,MASSBAT1                                         */
-/*      Macros :     $CHGIT, $FNDIT, $LOGIT, $SETVVMM, MASSEXIT               */
+/*      Macros :     $CHGIT, $FNDIT, $NOTFND, $LOGIT, $SETVVMM, MASSEXIT      */
 /*                                                                            */
 /******************************************************************************/
 /*                                                                            */
@@ -65,7 +65,7 @@ skip. = 0 /* Set the number of dsns to skip for each ddname for batch job */
 /* skip.ISPTLIB = 1 */
 /* OPTIONS ABOVE */
 
-massrlse = "V4R2"
+massrlse = "V4R3"
 Address ISPEXEC "CONTROL DISPLAY REFRESH"
 done  = "N"
 error = "N"
@@ -94,6 +94,8 @@ Do While done = "N"
       Call Check_dsns
       If error = "N" & masscmac = "$FNDIT" Then
         Call Check_$FNDIT_parms
+      If error = "N" & masscmac = "$NOTFND" Then
+        Call Check_$NOTFND_parms
       If error = "N" & masscmac = "$CHGIT" Then
         Call Check_$CHGIT_parms
       If error = "N" & masscmac = "$LOGIT" Then
@@ -315,6 +317,19 @@ Check_$FNDIT_parms:
 If massparm = "" Then
   Do
     Address ISPEXEC "SETMSG MSG(MASSC121)"
+    error = "Y"
+    csrfld = "MASSPARM"
+  End
+Return
+
+
+/******************************************************************************/
+/* Check for $NOTFND parms                                                    */
+/******************************************************************************/
+Check_$NOTFND_parms:
+If massparm = "" Then
+  Do
+    Address ISPEXEC "SETMSG MSG(MASSC125)"
     error = "Y"
     csrfld = "MASSPARM"
   End

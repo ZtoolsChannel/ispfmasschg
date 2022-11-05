@@ -13,23 +13,21 @@
 	Tutorial - Edit Macro Mass Change Facility -Tutorial
 Command ===>ZCMD                                                             
 
-  The following Rexx macro is a simple example of a macro that could be used
-   with this facility.  The macro saves the User State (various profile
-   settings as well as last find/change strings), sets the BOUNDS to default,
-   uses CHANGE with Picture Strings to change all lowercase characters to
-   uppercase, restores the User State, and then ENDs.  END will perform a SAVE
-   before exiting the member if any changes were made.
-
-                  /* Rexx                              */
-                  Address ISREDIT "MACRO"
-                  Address ISREDIT "(USTATE) = USER&UNDER.STATE"
-                  Address ISREDIT "BOUNDS"
-                  Address ISREDIT "C ALL P'<' P'>' "
-                  Address ISREDIT "USER&UNDER.STATE = (USTATE)"
-                  Address ISREDIT "END"
-
+   The$SETVVMMmacro is another included macro that will set the version
+   and/or modification level for each processed member.  The macro requires a
+   parameter in one of the following three forms where vv and mm are whole
+   numbers:
+
+     vv.mm- Set the version to vv and the level to mm
+     vv   - Set the version to vv
+     .mm  - Set the level to mm
+
+   Version (vv) can range from 01-99 and modification level (mm) from 00-99.
+
+
+                           (continued on next page)
 )INIT
-  &UNDER = _
 )PROC
+   &ZCONT = MASSCT26
    &ZUP = MASSCT00
 )END
